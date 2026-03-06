@@ -246,10 +246,15 @@ const CTA = () => (
           <p className="text-zinc-400 text-xl mb-12 max-w-2xl mx-auto">
             Book a 15-minute strategy call to see if your agency is a fit for our outbound system.
           </p>
-          <button className="bg-white text-black px-10 py-5 rounded-full text-xl font-bold hover:bg-zinc-100 transition-all inline-flex items-center gap-3">
-            Book My Strategy Call
-            <Calendar className="w-6 h-6" />
-          </button>
+          <a
+  href="https://calendly.com/anas-imps/diagnostic-strategique-acquisition-clients"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="bg-white text-black px-10 py-5 rounded-full text-xl font-bold hover:bg-zinc-100 transition-all inline-flex items-center gap-2"
+>
+  Book My Strategy Call
+  <Calendar className="w-6 h-6" />
+</a>
           <div className="mt-12 flex flex-wrap justify-center gap-8 text-zinc-500 text-sm font-medium uppercase tracking-widest">
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-500" />
