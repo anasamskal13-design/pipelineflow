@@ -64,13 +64,15 @@ for B2B Marketing Agencies <span className="text-zinc-500">B2B Marketing Agencie
           We help B2B marketing agencies generate qualified sales meetings through cold email, LinkedIn outreach and targeted prospecting.
         </p>
         <div className="flex flex-col sm:flex-row gap-4">
-          <button className="bg-black text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-zinc-800 transition-all flex items-center justify-center gap-2 group">
-            Book a Strategy Call
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </button>
-          <button className="bg-white text-zinc-900 border border-zinc-200 px-8 py-4 rounded-full text-lg font-medium hover:bg-zinc-50 transition-all">
-            See our process
-          </button>
+          <a
+  href="https://calendly.com/anas-imps/diagnostic-strategique-acquisition-clients"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="bg-black text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-zinc-800 transition-all flex items-center gap-2"
+>
+  Book a Strategy Call
+  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+</a>
         </div>
       </motion.div>
     </div>
