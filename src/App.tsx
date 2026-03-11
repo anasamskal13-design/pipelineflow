@@ -2,10 +2,6 @@
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
 
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
@@ -266,9 +262,6 @@ const translations = {
   },
 } as const;
 
-type Translations = typeof translations;
-
-
 const Navbar = ({
   language,
   setLanguage,
@@ -279,23 +272,25 @@ const Navbar = ({
   const t = translations[language];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-slate-200/80">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-200/80 shadow-sm">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-md shadow-blue-500/25">
+          <div className="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/25">
             <TrendingUp className="text-white w-5 h-5" />
           </div>
-          <span className="font-display font-bold text-xl tracking-tight">PipelineFlow</span>
+          <span className="font-display font-bold text-xl tracking-tight text-slate-950">
+            PipelineFlow
+          </span>
         </div>
 
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-600">
-          <a href="#problem" className="hover:text-black transition-colors">
+        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+          <a href="#problem" className="hover:text-blue-700 transition-colors">
             {t.nav.problem}
           </a>
-          <a href="#solution" className="hover:text-black transition-colors">
+          <a href="#solution" className="hover:text-blue-700 transition-colors">
             {t.nav.solution}
           </a>
-          <a href="#process" className="hover:text-black transition-colors">
+          <a href="#process" className="hover:text-blue-700 transition-colors">
             {t.nav.process}
           </a>
         </div>
@@ -304,20 +299,20 @@ const Navbar = ({
           <div className="hidden sm:flex items-center gap-2 text-sm">
             <button
               onClick={() => setLanguage('en')}
-              className={`px-3 py-1 rounded-full border ${
+              className={`px-3 py-1 rounded-full border transition-all ${
                 language === 'en'
-                  ? 'bg-black text-white border-black'
-                  : 'bg-white text-zinc-700 border-zinc-200'
+                  ? 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-500/20'
+                  : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300'
               }`}
             >
               EN
             </button>
             <button
               onClick={() => setLanguage('fr')}
-              className={`px-3 py-1 rounded-full border ${
+              className={`px-3 py-1 rounded-full border transition-all ${
                 language === 'fr'
-                  ? 'bg-black text-white border-black'
-                  : 'bg-white text-zinc-700 border-zinc-200'
+                  ? 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-500/20'
+                  : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300'
               }`}
             >
               FR
@@ -328,7 +323,7 @@ const Navbar = ({
             href={calendlyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-black text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-zinc-800 transition-all"
+            className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20"
           >
             {t.nav.book}
           </a>
@@ -342,28 +337,30 @@ const Hero = ({ language }: { language: Language }) => {
   const t = translations[language];
 
   return (
-    <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+    <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-gradient-to-b from-blue-50 via-sky-50/40 to-slate-50">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-3xl"
+          transition={{ duration: 0.7 }}
+          className="max-w-4xl"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-semibold mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-xs font-semibold mb-6 shadow-sm">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
             </span>
             {t.hero.badge}
           </div>
 
-          <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight text-zinc-900 mb-6 leading-[1.1]">
+          <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight text-slate-950 mb-6 leading-[1.02]">
             {t.hero.titleMain}{' '}
-            <span className="text-zinc-500">{t.hero.titleAccent}</span>
+            <span className="bg-gradient-to-r from-blue-600 to-sky-400 bg-clip-text text-transparent">
+              {t.hero.titleAccent}
+            </span>
           </h1>
 
-          <p className="text-xl text-zinc-600 mb-10 leading-relaxed max-w-2xl">
+          <p className="text-xl text-slate-600 mb-10 leading-relaxed max-w-2xl">
             {t.hero.subtitle}
           </p>
 
@@ -372,7 +369,7 @@ const Hero = ({ language }: { language: Language }) => {
               href={calendlyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-black text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-zinc-800 transition-all flex items-center justify-center gap-2 group"
+              className="bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-blue-700 transition-all flex items-center justify-center gap-2 group shadow-xl shadow-blue-500/20"
             >
               {t.hero.primaryCta}
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -380,17 +377,32 @@ const Hero = ({ language }: { language: Language }) => {
 
             <a
               href="#process"
-              className="bg-white text-zinc-900 border border-zinc-200 px-8 py-4 rounded-full text-lg font-medium hover:bg-zinc-50 transition-all text-center"
+              className="bg-white text-slate-900 border border-slate-200 px-8 py-4 rounded-full text-lg font-medium hover:bg-slate-50 transition-all text-center shadow-sm"
             >
               {t.hero.secondaryCta}
             </a>
           </div>
+
+          <div className="mt-12 grid sm:grid-cols-3 gap-4 max-w-3xl">
+            <div className="bg-white/80 backdrop-blur-sm border border-slate-200 rounded-2xl p-4 shadow-lg shadow-blue-100/30">
+              <div className="text-2xl font-bold text-slate-950 mb-1">15-30</div>
+              <div className="text-sm text-slate-600">Qualified meetings / month</div>
+            </div>
+            <div className="bg-white/80 backdrop-blur-sm border border-slate-200 rounded-2xl p-4 shadow-lg shadow-blue-100/30">
+              <div className="text-2xl font-bold text-slate-950 mb-1">B2B</div>
+              <div className="text-sm text-slate-600">Outbound acquisition system</div>
+            </div>
+            <div className="bg-white/80 backdrop-blur-sm border border-slate-200 rounded-2xl p-4 shadow-lg shadow-blue-100/30">
+              <div className="text-2xl font-bold text-slate-950 mb-1">ROI</div>
+              <div className="text-sm text-slate-600">Focused on predictable pipeline</div>
+            </div>
+          </div>
         </motion.div>
       </div>
 
-      <div className="absolute top-0 right-0 -z-10 w-1/2 h-full opacity-10 pointer-events-none">
-        <div className="absolute top-1/4 right-0 w-96 h-96 bg-emerald-500 rounded-full blur-[120px]"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-zinc-400 rounded-full blur-[100px]"></div>
+      <div className="absolute top-0 right-0 -z-10 w-1/2 h-full opacity-80 pointer-events-none">
+        <div className="absolute top-1/4 right-0 w-[28rem] h-[28rem] bg-blue-500/25 rounded-full blur-[140px]"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-sky-400/25 rounded-full blur-[120px]"></div>
       </div>
     </section>
   );
@@ -400,22 +412,22 @@ const Problem = ({ language }: { language: Language }) => {
   const t = translations[language];
 
   return (
-    <section id="problem" className="section-padding bg-zinc-900 text-white">
+    <section id="problem" className="py-20 px-6 md:px-12 lg:px-24 bg-slate-950 text-white">
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
             <h2 className="font-display text-3xl md:text-5xl font-bold mb-8 leading-tight">
               {t.problem.title}
             </h2>
-            <p className="text-zinc-400 text-lg mb-8 leading-relaxed">
+            <p className="text-slate-400 text-lg mb-8 leading-relaxed">
               {t.problem.text}
             </p>
 
             <div className="space-y-6">
               {t.problem.items.map((item, i) => (
                 <div key={i} className="flex items-start gap-3">
-                  <AlertCircle className="text-red-400 w-6 h-6 shrink-0 mt-0.5" />
-                  <span className="text-zinc-300 text-lg">{item}</span>
+                  <AlertCircle className="text-sky-400 w-6 h-6 shrink-0 mt-0.5" />
+                  <span className="text-slate-300 text-lg">{item}</span>
                 </div>
               ))}
             </div>
@@ -423,19 +435,19 @@ const Problem = ({ language }: { language: Language }) => {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-4">
-              <div className="bg-zinc-800 p-6 rounded-2xl border border-zinc-700">
-                <div className="text-3xl font-bold mb-1">0%</div>
-                <div className="text-zinc-500 text-sm">{t.problem.stats.referrals}</div>
+              <div className="bg-slate-900/80 p-6 rounded-2xl border border-slate-800 shadow-lg shadow-blue-950/20">
+                <div className="text-3xl font-bold mb-1 text-white">0%</div>
+                <div className="text-slate-500 text-sm">{t.problem.stats.referrals}</div>
               </div>
-              <div className="bg-zinc-800 p-6 rounded-2xl border border-zinc-700 mt-8">
-                <div className="text-3xl font-bold mb-1">4.2x</div>
-                <div className="text-zinc-500 text-sm">{t.problem.stats.inbound}</div>
+              <div className="bg-slate-900/80 p-6 rounded-2xl border border-slate-800 mt-8 shadow-lg shadow-blue-950/20">
+                <div className="text-3xl font-bold mb-1 text-white">4.2x</div>
+                <div className="text-slate-500 text-sm">{t.problem.stats.inbound}</div>
               </div>
             </div>
             <div className="space-y-4 pt-12">
-              <div className="bg-zinc-800 p-6 rounded-2xl border border-zinc-700">
-                <div className="text-3xl font-bold mb-1">82%</div>
-                <div className="text-zinc-500 text-sm">{t.problem.stats.outbound}</div>
+              <div className="bg-slate-900/80 p-6 rounded-2xl border border-slate-800 shadow-lg shadow-blue-950/20">
+                <div className="text-3xl font-bold mb-1 text-white">82%</div>
+                <div className="text-slate-500 text-sm">{t.problem.stats.outbound}</div>
               </div>
             </div>
           </div>
@@ -449,30 +461,31 @@ const Solution = ({ language }: { language: Language }) => {
   const t = translations[language];
 
   return (
-    <section id="solution" className="section-padding bg-white">
+    <section id="solution" className="py-20 px-6 md:px-12 lg:px-24 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-slate-950">
             {t.solution.title}
           </h2>
-          <p className="text-zinc-600 text-xl">{t.solution.text}</p>
+          <p className="text-slate-600 text-xl">{t.solution.text}</p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-   {t.solution.features.map((feature, i) => (
-  <motion.div
-    key={i}
-    whileHover={{ y: -5 }}
-    className="p-8 rounded-3xl border border-zinc-100 bg-zinc-50 hover:bg-white hover:shadow-xl hover:shadow-zinc-200/50 transition-all"
-  >
-    <div className="w-12 h-12 bg-black rounded-xl flex items-center justify-center mb-6">
-      <feature.icon className="text-white w-6 h-6" />
-    </div>
-    <h3 className="font-display text-xl font-bold mb-3">{feature.title}</h3>
-    <p className="text-zinc-600 leading-relaxed">{feature.desc}</p>
-  </motion.div>
-))}
-          
+          {t.solution.features.map((feature, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ y: -6 }}
+              className="p-8 rounded-3xl border border-slate-200 bg-white hover:bg-white hover:shadow-2xl hover:shadow-blue-100/40 transition-all"
+            >
+              <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mb-6 shadow-md shadow-blue-500/20">
+                <feature.icon className="text-white w-6 h-6" />
+              </div>
+              <h3 className="font-display text-xl font-bold mb-3 text-slate-950">
+                {feature.title}
+              </h3>
+              <p className="text-slate-600 leading-relaxed">{feature.desc}</p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
@@ -483,14 +496,16 @@ const Process = ({ language }: { language: Language }) => {
   const t = translations[language];
 
   return (
-    <section id="process" className="section-padding bg-zinc-50">
+    <section id="process" className="py-20 px-6 md:px-12 lg:px-24 bg-slate-100/70">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-16">
           <div className="lg:w-1/3">
             <div className="sticky top-32">
-              <h2 className="font-display text-4xl font-bold mb-6">{t.process.title}</h2>
-              <p className="text-zinc-600 text-lg mb-8">{t.process.text}</p>
-              <button className="text-black font-semibold flex items-center gap-2 group">
+              <h2 className="font-display text-4xl font-bold mb-6 text-slate-950">
+                {t.process.title}
+              </h2>
+              <p className="text-slate-600 text-lg mb-8">{t.process.text}</p>
+              <button className="text-blue-700 font-semibold flex items-center gap-2 group">
                 {t.process.learnMore}
                 <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
@@ -498,18 +513,17 @@ const Process = ({ language }: { language: Language }) => {
           </div>
 
           <div className="lg:w-2/3 space-y-12">
-           {t.process.steps.map((item, i) => (
-  <div key={i} className="flex gap-8 group">
-    <div className="font-display text-4xl font-bold text-zinc-200 group-hover:text-black transition-colors duration-500">
-      {item.step}
-    </div>
-    <div className="pt-2">
-      <h3 className="text-2xl font-bold mb-3">{item.title}</h3>
-      <p className="text-zinc-600 text-lg leading-relaxed">{item.desc}</p>
-    </div>
-  </div>
-))}
-            
+            {t.process.steps.map((item, i) => (
+              <div key={i} className="flex gap-8 group">
+                <div className="font-display text-4xl font-bold text-slate-300 group-hover:text-blue-600 transition-colors duration-500">
+                  {item.step}
+                </div>
+                <div className="pt-2">
+                  <h3 className="text-2xl font-bold mb-3 text-slate-950">{item.title}</h3>
+                  <p className="text-slate-600 text-lg leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -521,14 +535,14 @@ const CTA = ({ language }: { language: Language }) => {
   const t = translations[language];
 
   return (
-    <section className="section-padding">
+    <section className="py-20 px-6 md:px-12 lg:px-24">
       <div className="max-w-7xl mx-auto">
-        <div className="bg-black rounded-[2.5rem] p-12 md:p-20 text-center relative overflow-hidden">
+        <div className="bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 rounded-[2.5rem] p-12 md:p-20 text-center relative overflow-hidden shadow-2xl shadow-blue-900/20">
           <div className="relative z-10">
             <h2 className="font-display text-4xl md:text-6xl font-bold text-white mb-8 max-w-4xl mx-auto">
               {t.cta.title}
             </h2>
-            <p className="text-zinc-400 text-xl mb-12 max-w-2xl mx-auto">
+            <p className="text-slate-300 text-xl mb-12 max-w-2xl mx-auto">
               {t.cta.text}
             </p>
 
@@ -536,25 +550,25 @@ const CTA = ({ language }: { language: Language }) => {
               href={calendlyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white text-black px-10 py-5 rounded-full text-xl font-bold hover:bg-zinc-100 transition-all inline-flex items-center gap-3"
+              className="bg-white text-slate-900 px-10 py-5 rounded-full text-xl font-bold hover:bg-blue-50 transition-all inline-flex items-center gap-3 shadow-lg shadow-white/10"
             >
               {t.cta.button}
               <Calendar className="w-6 h-6" />
             </a>
 
-            <div className="mt-12 flex flex-wrap justify-center gap-8 text-zinc-500 text-sm font-medium uppercase tracking-widest">
+            <div className="mt-12 flex flex-wrap justify-center gap-8 text-slate-400 text-sm font-medium uppercase tracking-widest">
               {t.cta.badges.map((badge, i) => (
                 <div key={i} className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                  <CheckCircle2 className="w-4 h-4 text-sky-400" />
                   {badge}
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
-            <div className="absolute -top-24 -left-24 w-96 h-96 bg-emerald-500 rounded-full blur-[100px]"></div>
-            <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-zinc-500 rounded-full blur-[100px]"></div>
+          <div className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none">
+            <div className="absolute -top-24 -left-24 w-96 h-96 bg-blue-500/40 rounded-full blur-[100px]"></div>
+            <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-sky-400/30 rounded-full blur-[100px]"></div>
           </div>
         </div>
       </div>
@@ -566,24 +580,26 @@ const Footer = ({ language }: { language: Language }) => {
   const t = translations[language];
 
   return (
-    <footer className="py-12 px-6 border-t border-zinc-200">
+    <footer className="py-12 px-6 border-t border-slate-200 bg-white">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
         <div className="flex items-center gap-2">
-          <div className="w-6 h-6 bg-black rounded flex items-center justify-center">
+          <div className="w-6 h-6 bg-blue-600 rounded flex items-center justify-center">
             <TrendingUp className="text-white w-4 h-4" />
           </div>
-          <span className="font-display font-bold text-lg tracking-tight">PipelineFlow</span>
+          <span className="font-display font-bold text-lg tracking-tight text-slate-950">
+            PipelineFlow
+          </span>
         </div>
 
-        <div className="text-zinc-500 text-sm">
+        <div className="text-slate-500 text-sm">
           © {new Date().getFullYear()} PipelineFlow. {t.footer.rights}
         </div>
 
         <div className="flex gap-6">
-          <a href="#" className="text-zinc-400 hover:text-black transition-colors">
+          <a href="#" className="text-slate-400 hover:text-blue-600 transition-colors">
             <Linkedin className="w-5 h-5" />
           </a>
-          <a href="#" className="text-zinc-400 hover:text-black transition-colors">
+          <a href="#" className="text-slate-400 hover:text-blue-600 transition-colors">
             <Mail className="w-5 h-5" />
           </a>
         </div>
@@ -596,7 +612,7 @@ export default function App() {
   const [language, setLanguage] = useState<Language>('en');
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-slate-50">
       <Navbar language={language} setLanguage={setLanguage} />
       <main>
         <Hero language={language} />
