@@ -531,6 +531,144 @@ const Process = ({ language }: { language: Language }) => {
   );
 };
 
+const PilotProgram = ({ language }: { language: Language }) => {
+  const content =
+    language === 'fr'
+      ? {
+          badge: '🔒 Limité à 2 agences',
+          title: 'Rejoignez notre programme clients fondateurs',
+          subtitle:
+            'Nous intégrons 2 agences pilotes à un tarif réduit en échange d’un cas client et d’un témoignage.',
+          priceTitle: 'Tarif',
+          priceMain: '1 500€ / mois',
+          priceOld: 'Au lieu de 3 500€',
+          priceNote: 'tarif pilote · 2 places seulement',
+          getTitle: 'Ce que vous obtenez',
+          getItems: [
+            'Full outbound system setup',
+            '15-30 qualified meetings/month',
+            'Cold email + LinkedIn sequences',
+            'Dedicated account manager',
+            'Weekly reporting',
+          ],
+          askTitle: 'Ce qu’on demande',
+          askItems: [
+            '3-month commitment',
+            'Honest feedback',
+            '1 written testimonial',
+            '1 case study (anonymized ok)',
+          ],
+          cta: 'Postuler pour une place pilote →',
+          note:
+            'Sans contrat long terme. Résiliation possible à tout moment après le 1er mois.',
+        }
+      : {
+          badge: '🔒 Limited to 2 agencies',
+          title: 'Join Our Founding Client Program',
+          subtitle:
+            "We're onboarding 2 pilot agencies at a reduced rate in exchange for a case study and testimonial.",
+          priceTitle: 'Pricing',
+          priceMain: '1 500€ / month',
+          priceOld: 'Instead of 3 500€',
+          priceNote: 'pilot rate · 2 spots only',
+          getTitle: 'What you get',
+          getItems: [
+            'Full outbound system setup',
+            '15-30 qualified meetings/month',
+            'Cold email + LinkedIn sequences',
+            'Dedicated account manager',
+            'Weekly reporting',
+          ],
+          askTitle: 'What we ask',
+          askItems: [
+            '3-month commitment',
+            'Honest feedback',
+            '1 written testimonial',
+            '1 case study (anonymized ok)',
+          ],
+          cta: 'Apply for a Pilot Spot →',
+          note: 'No long-term contract. Cancel anytime after month 1.',
+        };
+
+  return (
+    <section className="py-20 px-6 md:px-12 lg:px-24 bg-slate-950 text-white">
+      <div className="max-w-7xl mx-auto">
+        <div className="max-w-3xl mx-auto text-center mb-14">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-400/20 text-orange-300 text-xs font-semibold mb-6 shadow-sm">
+            {content.badge}
+          </div>
+
+          <h2 className="font-display text-4xl md:text-5xl font-bold mb-5 text-white">
+            {content.title}
+          </h2>
+
+          <p className="text-slate-300 text-lg md:text-xl leading-relaxed">
+            {content.subtitle}
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-3 gap-6">
+          <div className="rounded-3xl border border-slate-800 bg-slate-900/70 p-8 shadow-lg shadow-black/20">
+            <div className="text-sm uppercase tracking-[0.18em] text-slate-400 mb-5">
+              {content.priceTitle}
+            </div>
+            <div className="text-4xl md:text-5xl font-display font-bold text-white mb-3">
+              {content.priceMain}
+            </div>
+            <div className="text-slate-400 text-lg line-through mb-2">
+              {content.priceOld}
+            </div>
+            <div className="text-orange-300 text-sm font-medium">
+              {content.priceNote}
+            </div>
+          </div>
+
+          <div className="rounded-3xl border border-slate-800 bg-slate-900/70 p-8 shadow-lg shadow-black/20">
+            <div className="text-sm uppercase tracking-[0.18em] text-slate-400 mb-5">
+              {content.getTitle}
+            </div>
+            <div className="space-y-4">
+              {content.getItems.map((item, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-sky-400 shrink-0 mt-0.5" />
+                  <span className="text-slate-200">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-3xl border border-slate-800 bg-slate-900/70 p-8 shadow-lg shadow-black/20">
+            <div className="text-sm uppercase tracking-[0.18em] text-slate-400 mb-5">
+              {content.askTitle}
+            </div>
+            <div className="space-y-4">
+              {content.askItems.map((item, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-sky-400 shrink-0 mt-0.5" />
+                  <span className="text-slate-200">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-12 text-center">
+          <a
+            href={calendlyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-700 transition-all shadow-xl shadow-blue-500/20"
+          >
+            {content.cta}
+          </a>
+
+          <p className="mt-4 text-sm text-slate-400">{content.note}</p>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const CTA = ({ language }: { language: Language }) => {
   const t = translations[language];
 
@@ -619,6 +757,7 @@ export default function App() {
         <Problem language={language} />
         <Solution language={language} />
         <Process language={language} />
+        <PilotProgram language={language} />
         <CTA language={language} />
       </main>
       <Footer language={language} />
