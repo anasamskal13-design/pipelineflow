@@ -296,7 +296,7 @@ const Navbar = ({
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="hidden sm:flex items-center gap-2 text-sm">
+          <div className="flex items-center gap-2 text-sm">
             <button
               onClick={() => setLanguage('en')}
               className={`px-3 py-1 rounded-full border transition-all ${
