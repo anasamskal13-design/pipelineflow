@@ -17,6 +17,9 @@ import {
   TrendingUp,
   AlertCircle,
   ChevronRight,
+  BarChart3,
+  Activity,
+  Sparkles,
 } from 'lucide-react';
 
 type Language = 'en' | 'fr';
@@ -40,6 +43,21 @@ const translations = {
         'We help B2B marketing agencies generate qualified sales meetings through cold email, LinkedIn outreach and targeted prospecting.',
       primaryCta: 'Book a Strategy Call',
       secondaryCta: 'See our process',
+      stats: {
+        meetings: 'Qualified meetings / month',
+        system: 'Outbound acquisition system',
+        roi: 'Focused on predictable pipeline',
+      },
+      visual: {
+        campaign: 'Active Campaigns',
+        meetings: 'Meetings Booked',
+        replyRate: 'Reply Rate',
+        pipeline: 'Pipeline Value',
+        qualified: 'Qualified this week',
+        deliverability: 'Deliverability',
+        warm: 'Warm lead',
+        booked: 'Booked call',
+      },
     },
     problem: {
       title: 'The Referral Trap: Why Most Agencies Struggle to Scale',
@@ -157,6 +175,21 @@ const translations = {
         'Nous aidons les agences marketing B2B à générer des rendez-vous commerciaux qualifiés grâce au cold email, à l’outreach LinkedIn et à une prospection ciblée.',
       primaryCta: 'Réserver un appel stratégique',
       secondaryCta: 'Voir notre process',
+      stats: {
+        meetings: 'Rendez-vous qualifiés / mois',
+        system: 'Système d’acquisition outbound',
+        roi: 'Axé sur un pipeline prévisible',
+      },
+      visual: {
+        campaign: 'Campagnes actives',
+        meetings: 'Rendez-vous bookés',
+        replyRate: 'Taux de réponse',
+        pipeline: 'Valeur pipeline',
+        qualified: 'Qualifiés cette semaine',
+        deliverability: 'Délivrabilité',
+        warm: 'Lead chaud',
+        booked: 'Appel réservé',
+      },
     },
     problem: {
       title:
@@ -299,7 +332,7 @@ const Navbar = ({
           <div className="flex items-center gap-2 text-sm">
             <button
               onClick={() => setLanguage('en')}
-              className={`px-3 py-1 rounded-full border transition-all ${
+              className={`px-2.5 sm:px-3 py-1 rounded-full border text-xs sm:text-sm transition-all ${
                 language === 'en'
                   ? 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-500/20'
                   : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300'
@@ -309,7 +342,7 @@ const Navbar = ({
             </button>
             <button
               onClick={() => setLanguage('fr')}
-              className={`px-3 py-1 rounded-full border transition-all ${
+              className={`px-2.5 sm:px-3 py-1 rounded-full border text-xs sm:text-sm transition-all ${
                 language === 'fr'
                   ? 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-500/20'
                   : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300'
@@ -323,9 +356,10 @@ const Navbar = ({
             href={calendlyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20"
+            className="bg-blue-600 text-white px-3 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20"
           >
-            {t.nav.book}
+            <span className="sm:hidden">Call</span>
+            <span className="hidden sm:inline">{t.nav.book}</span>
           </a>
         </div>
       </div>
@@ -333,76 +367,203 @@ const Navbar = ({
   );
 };
 
+const HeroVisual = ({ language }: { language: Language }) => {
+  const t = translations[language];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: 30, y: 20 }}
+      animate={{ opacity: 1, x: 0, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.15 }}
+      className="relative w-full max-w-xl mx-auto"
+    >
+      <div className="absolute -top-12 -right-8 w-40 h-40 bg-blue-500/20 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-40 h-40 bg-sky-400/20 rounded-full blur-3xl" />
+
+      <div className="relative rounded-[2rem] border border-slate-200 bg-white/90 backdrop-blur-xl shadow-2xl shadow-blue-200/40 overflow-hidden">
+        <div className="border-b border-slate-200 px-5 py-4 flex items-center justify-between bg-white/80">
+          <div>
+            <div className="text-sm font-semibold text-slate-950">{t.hero.visual.campaign}</div>
+            <div className="text-xs text-slate-500">PipelineFlow Dashboard</div>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-sky-400"></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-slate-300"></span>
+          </div>
+        </div>
+
+        <div className="p-5 space-y-5">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs uppercase tracking-wide text-slate-500">
+                  {t.hero.visual.meetings}
+                </span>
+                <Calendar className="w-4 h-4 text-blue-600" />
+              </div>
+              <div className="text-3xl font-bold text-slate-950">18</div>
+              <div className="text-xs text-emerald-600 mt-1">+22% this month</div>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs uppercase tracking-wide text-slate-500">
+                  {t.hero.visual.replyRate}
+                </span>
+                <Activity className="w-4 h-4 text-sky-500" />
+              </div>
+              <div className="text-3xl font-bold text-slate-950">12.4%</div>
+              <div className="text-xs text-emerald-600 mt-1">Above benchmark</div>
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-sm font-semibold text-slate-950">
+                {t.hero.visual.pipeline}
+              </span>
+              <BarChart3 className="w-4 h-4 text-blue-600" />
+            </div>
+
+            <div className="space-y-3">
+              <div>
+                <div className="flex justify-between text-xs text-slate-500 mb-1">
+                  <span>{t.hero.visual.qualified}</span>
+                  <span>74%</span>
+                </div>
+                <div className="h-2.5 rounded-full bg-slate-200 overflow-hidden">
+                  <div className="h-full w-[74%] rounded-full bg-gradient-to-r from-blue-600 to-sky-400"></div>
+                </div>
+              </div>
+
+              <div>
+                <div className="flex justify-between text-xs text-slate-500 mb-1">
+                  <span>{t.hero.visual.deliverability}</span>
+                  <span>97%</span>
+                </div>
+                <div className="h-2.5 rounded-full bg-slate-200 overflow-hidden">
+                  <div className="h-full w-[97%] rounded-full bg-gradient-to-r from-sky-500 to-cyan-400"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+            <div className="flex items-center justify-between mb-4">
+              <div className="text-sm font-semibold text-slate-950">Lead Activity</div>
+              <span className="inline-flex items-center gap-1 text-xs text-blue-700 bg-blue-50 px-2 py-1 rounded-full">
+                <Sparkles className="w-3 h-3" />
+                Live
+              </span>
+            </div>
+
+            <div className="space-y-3">
+              <div className="flex items-center justify-between rounded-xl bg-slate-50 px-3 py-3">
+                <div>
+                  <div className="text-sm font-medium text-slate-950">Growth Agency</div>
+                  <div className="text-xs text-slate-500">{t.hero.visual.warm}</div>
+                </div>
+                <span className="text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
+                  Interested
+                </span>
+              </div>
+
+              <div className="flex items-center justify-between rounded-xl bg-slate-50 px-3 py-3">
+                <div>
+                  <div className="text-sm font-medium text-slate-950">SEO Agency</div>
+                  <div className="text-xs text-slate-500">{t.hero.visual.booked}</div>
+                </div>
+                <span className="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded-full">
+                  Friday 10:30
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 const Hero = ({ language }: { language: Language }) => {
   const t = translations[language];
 
   return (
-    <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-gradient-to-b from-blue-50 via-sky-50/40 to-slate-50">
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="max-w-4xl"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-xs font-semibold mb-6 shadow-sm">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-            </span>
-            {t.hero.badge}
-          </div>
-
-          <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight text-slate-950 mb-6 leading-[1.02]">
-            {t.hero.titleMain}{' '}
-            <span className="bg-gradient-to-r from-blue-600 to-sky-400 bg-clip-text text-transparent">
-              {t.hero.titleAccent}
-            </span>
-          </h1>
-
-          <p className="text-xl text-slate-600 mb-10 leading-relaxed max-w-2xl">
-            {t.hero.subtitle}
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4">
-            <a
-              href={calendlyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-blue-700 transition-all flex items-center justify-center gap-2 group shadow-xl shadow-blue-500/20"
-            >
-              {t.hero.primaryCta}
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </a>
-
-            <a
-              href="#process"
-              className="bg-white text-slate-900 border border-slate-200 px-8 py-4 rounded-full text-lg font-medium hover:bg-slate-50 transition-all text-center shadow-sm"
-            >
-              {t.hero.secondaryCta}
-            </a>
-          </div>
-
-          <div className="mt-12 grid sm:grid-cols-3 gap-4 max-w-3xl">
-            <div className="bg-white/80 backdrop-blur-sm border border-slate-200 rounded-2xl p-4 shadow-lg shadow-blue-100/30">
-              <div className="text-2xl font-bold text-slate-950 mb-1">15-30</div>
-              <div className="text-sm text-slate-600">Qualified meetings / month</div>
-            </div>
-            <div className="bg-white/80 backdrop-blur-sm border border-slate-200 rounded-2xl p-4 shadow-lg shadow-blue-100/30">
-              <div className="text-2xl font-bold text-slate-950 mb-1">B2B</div>
-              <div className="text-sm text-slate-600">Outbound acquisition system</div>
-            </div>
-            <div className="bg-white/80 backdrop-blur-sm border border-slate-200 rounded-2xl p-4 shadow-lg shadow-blue-100/30">
-              <div className="text-2xl font-bold text-slate-950 mb-1">ROI</div>
-              <div className="text-sm text-slate-600">Focused on predictable pipeline</div>
-            </div>
-          </div>
-        </motion.div>
+    <section className="relative pt-32 pb-20 lg:pt-44 lg:pb-28 overflow-hidden bg-gradient-to-b from-blue-50 via-sky-50/50 to-slate-50">
+      <div className="absolute inset-0 opacity-[0.35] pointer-events-none">
+        <div className="absolute inset-0 [background-image:linear-gradient(to_right,rgba(148,163,184,0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.12)_1px,transparent_1px)] [background-size:48px_48px]"></div>
       </div>
 
-      <div className="absolute top-0 right-0 -z-10 w-1/2 h-full opacity-80 pointer-events-none">
-        <div className="absolute top-1/4 right-0 w-[28rem] h-[28rem] bg-blue-500/25 rounded-full blur-[140px]"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-sky-400/25 rounded-full blur-[120px]"></div>
+      <div className="absolute top-0 right-0 -z-10 w-[40rem] h-[40rem] bg-blue-500/15 rounded-full blur-[160px]"></div>
+      <div className="absolute bottom-0 left-0 -z-10 w-[28rem] h-[28rem] bg-sky-400/15 rounded-full blur-[140px]"></div>
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-14 xl:gap-20 items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="max-w-4xl"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-xs font-semibold mb-6 shadow-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+              </span>
+              {t.hero.badge}
+            </div>
+
+            <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight text-slate-950 mb-6 leading-[1.02]">
+              {t.hero.titleMain}{' '}
+              <span className="bg-gradient-to-r from-blue-600 to-sky-400 bg-clip-text text-transparent">
+                {t.hero.titleAccent}
+              </span>
+            </h1>
+
+            <p className="text-xl text-slate-600 mb-10 leading-relaxed max-w-2xl">
+              {t.hero.subtitle}
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a
+                href={calendlyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-blue-700 transition-all flex items-center justify-center gap-2 group shadow-xl shadow-blue-500/20"
+              >
+                {t.hero.primaryCta}
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </a>
+
+              <a
+                href="#process"
+                className="bg-white text-slate-900 border border-slate-200 px-8 py-4 rounded-full text-lg font-medium hover:bg-slate-50 transition-all text-center shadow-sm"
+              >
+                {t.hero.secondaryCta}
+              </a>
+            </div>
+
+            <div className="mt-12 grid sm:grid-cols-3 gap-4 max-w-3xl">
+              <div className="bg-white/80 backdrop-blur-sm border border-slate-200 rounded-2xl p-4 shadow-lg shadow-blue-100/30">
+                <div className="text-2xl font-bold text-slate-950 mb-1">15-30</div>
+                <div className="text-sm text-slate-600">{t.hero.stats.meetings}</div>
+              </div>
+              <div className="bg-white/80 backdrop-blur-sm border border-slate-200 rounded-2xl p-4 shadow-lg shadow-blue-100/30">
+                <div className="text-2xl font-bold text-slate-950 mb-1">B2B</div>
+                <div className="text-sm text-slate-600">{t.hero.stats.system}</div>
+              </div>
+              <div className="bg-white/80 backdrop-blur-sm border border-slate-200 rounded-2xl p-4 shadow-lg shadow-blue-100/30">
+                <div className="text-2xl font-bold text-slate-950 mb-1">ROI</div>
+                <div className="text-sm text-slate-600">{t.hero.stats.roi}</div>
+              </div>
+            </div>
+          </motion.div>
+
+          <div className="hidden lg:block">
+            <HeroVisual language={language} />
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -608,7 +769,7 @@ const PilotProgram = ({ language }: { language: Language }) => {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6">
-          <div className="rounded-3xl border border-slate-800 bg-slate-900/70 p-8 shadow-lg shadow-black/20">
+          <div className="rounded-3xl border border-blue-700/40 bg-gradient-to-br from-blue-950/60 to-slate-900/90 p-8 shadow-xl shadow-blue-900/20">
             <div className="text-sm uppercase tracking-[0.18em] text-slate-400 mb-5">
               {content.priceTitle}
             </div>
